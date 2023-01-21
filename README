@@ -1,0 +1,72 @@
+Copyright Mihai-Cosmin Nour 311CAb 2022-2023
+
+Homework 3 - PCLP1
+
+Usage:
+    To build:
+        make
+    To run:
+        ./image_editor
+    To use:
+        To load the image from a file:
+        	LOAD <file name>
+        To select all the image or a part of an image:
+        	SELECT ALL
+        	SELECT <x1> <y1> <x2> <y2>
+        	(where (x1,y1) are the coordinates of top-left corner
+        	and (x2,y2) of the bottom-right corner)
+        To show the histogram for a gray image:
+        	HISTOGRAM <number of stars per bin> <number of bins>
+        	(number of bins needs to be a power of 2)
+        To rotate a selection of the image (square or whole image):
+        	ROTATE <angle>
+        	(angle needs to be a multiply of 90, even negative)
+        To crop an image using a selection:
+        	CROP
+        To apply a kernel over a selection of a color image:
+        	APPLY <TYPE>
+        	(where TYPE can be EDGE, SHARPEN, BLUR or GAUSSIAN_BLUR)
+        To save the edited image in a file
+        	SAVE <file name> [ascii]
+        	(ascii for text file, nothing for binary file)
+        To exit the program:
+        	EXIT
+
+Files used:
+    - image_editor.c - main file;
+    - utils.c/.h - functions used in the program;
+    - commands.c/.h - functions that do a certain command in main;
+    - read_print.c/.h - functions used for reading and writing the image;
+    - my_alloc.c/.h - functions that use malloc and free for dynamic
+    		      allocation of memory;
+    - my_defs.h - includes all the macros and structs made;
+    - Makefile - build and clean rules.
+
+Algorithms used:
+    - rotation of a matrix
+    - histogram, equalization, application of edge detection, sharpen, blur
+    and gaussian blur for an image (full explanation in the document provided
+    by the PCLP team)
+
+General idea:
+    
+    The program represents an image editor that works in the Linux terminal. It
+    can use NetPBM format images, meaning it can edit P2, P3, P5 and P6 images.
+    The user can load an image from a file, edit it in a number of ways, and
+    then save it in a file.
+
+    Every memory allocation is followed by some defensive programming code to
+    ensure the safety and security of the data.
+
+Encountered problems and fixes:
+    
+    1) Work with files (especially binary).
+    
+    A lot of the time I spent doing this homework was spent making the load and
+    save commands. It was a little difficult at first to understand in which
+    way I should open the file, how to read and how to store the data. In the
+    case of the binary file I also had to make sure I read and write byte after
+    byte, except for the header. After taking some time testing and
+    experimenting I am now confident I will be able to work better with files
+    from now on.
+
